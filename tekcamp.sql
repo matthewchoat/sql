@@ -29,7 +29,7 @@
 
 -- update tekcampers
 -- set gender = education
--- where id BETWEEN 1 and 27;
+-- where id BETWEEN 1 and 38;
 
 -- update tekcampers
 -- set education = null
@@ -149,3 +149,14 @@
 -- on `ta-mark`.id = hobbiesintagroup.person_id
 -- left join hobbies
 -- on hobbiesintagroup.hobby_id = hobbies.id;
+--
+--alter table `ta-mark`
+--add column last_bootcamp varchar(50);
+
+-- UPDATE tekcampers
+-- set education = 'Bachelors Degree'
+-- WHERE id = 34;
+
+--  alter table tekcampers
+-- add column last_bootcamp varchar(50);
+
