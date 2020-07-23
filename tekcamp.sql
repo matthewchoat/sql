@@ -97,6 +97,9 @@
 -- select * from tekcampers
 -- where (id=8 OR id=21 or id=23 or id=25 or id=27 or id=28 or id=29 or id=31 or id=33 or id=35 or id=36 or id=38);
 
+--create table hobbies
+--(hobby_id int primary key auto_increment, hobby_name varchar(50));
+
 -- insert into hobbies(hobby)
 -- values
 -- ("Reading"),
