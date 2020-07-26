@@ -1,0 +1,184 @@
+-- BONUS for exercise 11.1. I set up an Amazon console account and used their RDS interface to configure a DB server.
+
+-- I used Amazon's cloud database because I was somewhat experienced using S3 buckets and I like the simplicity of their interface.
+-- I made sure to choose the FREE TIER server and set data limits so I wouldn't get charged for a test server.
+-- The setup was easy enough, but I had some issues with bugs and errors trying to connect MySQL Workbench to my AWS RDS server.
+-- I ended up going to StackOverflow articles with people having similar issues. I had to adjust a few extra settings in my RDS configuration on the AWS console to allow the database to be accessed publicly.
+-- Once I got the database connected, I wrote the following code to properly meet the conditions of the exercise. I've included a screenshot "group_hobbies_screenshot_AWS_RDS_BONUS.png" of the final group table.
+
+-- To connect to my database, enter the following:
+-- Hostname: database-module-11-1.cdmu6k3sws5w.us-east-1.rds.amazonaws.com
+-- Username: admin
+-- Password: **Message me on Slack for password**
+--
+--
+-- Connect to my instance from your preferred MySql cli or gui with the provided endpoint. Copy and paste these commands in and run the file retrieve the data.
+
+select * from tekcampers;
+
+select * from `ta-mark`;
+
+select * hobbies;
+
+select * hobbiesintagroup;
+
+-- This is the join command I used to join the ta-mark table, hobbies, and hobbiesintagroup table and get the firstname, lastname, and hobby that was associated to that person.
+-- select first_name, last_name, hobby_name from `ta-mark`
+-- left join hobbiesintagroup
+-- on `ta-mark`.id = hobbiesintagroup.person_id
+-- left join hobbies
+-- on hobbiesintagroup.hobby_id = hobbies.hobby_id;
+
+-- BELOW IS THE CODE I WROTE TO INPUT THIS DATA INTO THE DATABASE
+
+
+-- CREATE SCHEMA `teksystems`;
+--
+--
+-- show databases;
+--
+--
+-- create table `teksystems`.`tekcampers` (
+-- `id` int not null auto_increment,
+-- `first_name` varchar(50) null,
+-- `last_name` varchar(50) null,
+-- `gender` varchar(10) null,
+-- `education` varchar(45) null,
+-- `bootcamp` varchar(45) null,
+-- primary key (`id`));
+--
+-- select * from teksystems.tekcampers;
+--
+-- insert into tekcampers(first_name, last_name, gender, education, bootcamp)
+-- values
+-- ('Abigail','Swigert','F','Bachelors',NULL),
+-- ('Gabe','Chavez','M',NULL,'Us Navy'),
+-- ('Nancy','Golden','F','Masters',NULL),
+-- ('Jessica','Ulysse','F','Bachelors',NULL),
+-- ('Sabitha','Radhakrishnan','F','Bachelors',NULL),
+-- ('Adam','Rice','M','Bachelors','Coding Dojo'),
+-- ('Marcelo','Barbosa','M','Some College','Coding Dojo'),
+-- ('Caleb','Waters','M','Associates',NULL),
+-- ('Norita','Sieffert','F','Doctorate',NULL),
+-- ('Katherine','Kim','F','Bachelors',NULL),
+-- ('Julian','Ladd','M','Some College','Coding Dojo'),
+-- ('Vani','Muppuru','F','Masters',NULL),
+-- ('Kevin','Ibanez','M','High School',NULL),
+-- ('George','Torres','M','Some College',NULL),
+-- ('Jose','Moreno','M','Bachelors',NULL),
+-- ('Phoenix','Shane','F','Associates','DevMountain'),
+-- ('Mathew','Castiglione','M','Bachelors',NULL),
+-- ('Victor','Betts','M','Some College',NULL),
+-- ('Mathew','Choat','M','Masters','SMU Coding'),
+-- ('Michael','Kinney','M',NULL,NULL),
+-- ('Korey','Brooks','M','Masters',NULL),
+-- ('Christian','Gonzalez','M','Some College',NULL),
+-- ('Zachary','Johnson','M','High School','DevMountain'),
+-- ('Sarah','Bates','F',NULL,NULL),
+-- ('Cody','Clark','M','Some College','Trilogy Education'),
+-- ('Aaron','White','M',NULL,NULL),
+-- ('Monica','Howard','F',NULL,NULL),
+-- ('Kevin','Keesee','M','High School',NULL),
+-- ('Devon','Brewster','M','Some College',NULL),
+-- ('John','Bozarov','M','Bachelors',NULL),
+-- ('John','Kol','M','Some College',NULL),
+-- ('Justin','Cheng','M','Some College','Trilogy Education'),
+-- ('Tyler','Clements','M','Bachelors',NULL),
+-- ('Vimala','Murthy','F','Masters',NULL),
+-- ('Gowtham','Katta','M','Bachelors',NULL);
+--
+--  select * from tekcampers
+--  where length(last_name) > 7;
+--
+-- select * from tekcampers
+-- order by first_name asc;
+--
+-- select * from tekcampers
+-- order by last_name;
+--
+-- select * from tekcampers
+-- where gender = 'M';
+--
+-- select * from tekcampers
+-- where gender = 'F';
+--
+-- select * from tekcampers
+-- where education = 'Masters';
+--
+-- select * from tekcampers
+-- where education = 'Bachelors';
+--
+-- select * from tekcampers
+-- where education = 'Associates';
+--
+-- select * from tekcampers
+-- where (education = null OR education = 'Some College' OR education = 'High School');
+--
+-- select * from teksystems.tekcampers;
+--
+-- create table `ta-mark` AS
+-- select * from tekcampers
+-- where (id=8 OR id=19 or id=21 or id=23 or id=24 or id=25 or id=26 or id=28 or id=30 or id=32 or id=33 or id=35);
+--
+-- select * from `ta-mark`;
+--
+-- create table hobbies
+-- (hobby_id int primary key auto_increment, hobby_name varchar(50));
+--
+-- insert into hobbies(hobby_name)
+-- values
+-- ("Reading"),
+-- ("Motorcycle Riding"),
+-- ("Video Games"),
+-- ("Golfing"),
+-- ("Cattle Rusting"),
+-- ("Gardening"),
+-- ("Aerial Yoga"),
+-- ("Running"),
+-- ("Working Out"),
+-- ("Pickle Ball"),
+-- ("Engineering projects with the kids"),
+-- ("Jiu Jitsu"),
+-- ("Writing"),
+-- ("Cooking"),
+-- ("Eating"),
+-- ("Music"),
+-- ("Hockey"),
+-- ("Soccer"),
+-- ("Longboarding"),
+-- ("Growing Hot Peppers"),
+-- ("Interior decoration"),
+-- ("Playing Piano"),
+-- ("EatSleepCode");
+--
+-- create table hobbiesintagroup(
+-- person_id int not null references `ta-mark`(id),
+-- hobby_id int not null references `ta-mark`(hobby_id)
+-- );
+--
+-- select * from hobbies;
+-- select * from `ta-mark`;
+--
+-- insert into hobbiesintagroup(person_id, hobby_id)
+-- values
+-- (8, 15),
+-- (21, 22),
+-- (23, 17),
+-- (25, 14),
+-- (19, 19),
+-- (24, 1),
+-- (26, 1),
+-- (28, 3),
+-- (30, 18),
+-- (32, 15),
+-- (33, 20),
+-- (35, 8)
+-- ;
+--
+-- select * from `ta-mark`;
+--
+-- select first_name, last_name, hobby_name from `ta-mark`
+-- left join hobbiesintagroup
+-- on `ta-mark`.id = hobbiesintagroup.person_id
+-- left join hobbies
+-- on hobbiesintagroup.hobby_id = hobbies.hobby_id;
